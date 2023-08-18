@@ -13,16 +13,18 @@ import pacoteUtil.Cores;
 public class Menu {
 
 	public static void main(String[] args) {
+		
+		ContaController contas = new ContaController();
+		
+		Scanner leia = new Scanner(System.in);
+		
 		// TODO Auto-generated method stub
 		
-		int opcao, numero, agencia, aniversario;
-		int tipo;
+		int opcao, numero, agencia, aniversario, tipo, numeroDestino;
 		String titular;
-		float saldo, limite;
+		float saldo, limite, valor;
 		
 		System.out.println("\nCriar Contas\n");
-
-		ContaController contas = new ContaController();
 		
 		contaCorrente cc1 = new contaCorrente(contas.gerarNumero(), 123, 1, "GUilherme Martins", 100000f, 100.0f);
 		contas.cadastrar(cc1);
@@ -35,7 +37,6 @@ public class Menu {
 		
 		contaPoupanca cp2 = new contaPoupanca(contas.gerarNumero(), 666, 9, "Joelson Meneses", 8500f, 15);
 		
-		Scanner leia = new Scanner(System.in);
 		
 	while(true) {
 		System.out.println(Cores.TEXT_BLUE_BRIGHT + Cores.ANSI_BLACK_BACKGROUND										     );
@@ -171,14 +172,45 @@ public class Menu {
 		break;
 	case 6:
 		System.out.print(Cores.TEXT_RED_BRIGHT + Cores.ANSI_BLACK_BACKGROUND+ "Saque\n\n");
-		keyPress();
+		
+		 System.out.println("Digite o numero da conta: ");
+		 numero = leia.nextInt();
+		 
+		 do {
+			 System.out.println("Digite o valor do saque (R$): ");
+			 valor = leia.nextFloat();
+		 }while (valor <= 0);
+		 
+		 contas.sacar(numero, valor);
+		 
+		 keyPress();
 		break;
 	case 7:
 		System.out.print(Cores.TEXT_RED_BRIGHT + Cores.ANSI_BLACK_BACKGROUND+ "Depósito\n\n");
+		
+		System.out.println("Digite o numero da conta: ");
+		numero = leia.nextInt();
+		
+		do {
+			System.out.println("Digite o valor do deposito (R$): ");
+			valor = leia.nextFloat();
+		}while(valor <= 0);
+		
+		contas.depositar(numero, valor);
 		keyPress();
 		break;
 	case 8:
 		System.out.print(Cores.TEXT_RED_BRIGHT + Cores.ANSI_BLACK_BACKGROUND+ "Transência entre Contas \n\n");
+		
+		System.out.println("Digite o numero da conta de Origem: ");
+		numero = leia.nextInt();
+		System.out.println("Digite o numero da conta Destino: ");
+		numeroDestino = leia.nextInt();
+		
+		do {
+			System.out.println("Digite o valor da transferencia (R$) ");
+			valor = leia.nextInt();
+		}while (valor <= 0);
 		keyPress();
 		break;
 	default:
