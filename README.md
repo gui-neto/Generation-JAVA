@@ -1,2 +1,1 @@
-# gen-java
-Alo_java
+Atividades realizadas durante o treinamento do bootcamp Generation Brasil.
